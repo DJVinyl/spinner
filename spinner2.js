@@ -1,17 +1,15 @@
-// Ctrl + C to terminate
-setInterval( () => {
+const spin = ['|','/','-','\\'];
+
+const doTimeout = (char, time) => {
   setTimeout(() => {
-    process.stdout.write('\r|   ');
-    setTimeout(() => {
-      process.stdout.write('\r/   ');
-      setTimeout(() => {
-        process.stdout.write('\r-   ');
-        setTimeout(() => {
-          // Need to escape the backslash since it's a special character.
-          process.stdout.write('\r\\   ');
-        }, 700);
-      }, 500);
-    }, 300);
-  }, 100);
-}, 2000);
+    process.stdout.write(`\r${char}\t`);
+  }, time);
+};
+
+const spinloop = () => {
+  for (let i = 0; i < 4; i++) {
+    doTimeout(spin[i], 200 * i);
+  }
+};
+setInterval(spinloop,spin.length * 200 + 200);
 
